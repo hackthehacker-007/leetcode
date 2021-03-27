@@ -1,0 +1,31 @@
+class Solution {
+public:
+    void generate(string curr,int n,int open , int close,vector<string> & v)
+    {
+       if(curr.length()==2*n)
+       {
+             v.push_back(curr);
+             return;
+       }
+        
+        if(open<n)
+        {  
+            generate(curr+"(",n,open+1,close,v);
+        }
+        
+         if(open>close)
+        {  
+            generate(curr+")",n,open,close+1,v);
+        }
+   
+    }
+    
+    vector<string> generateParenthesis(int n) {
+          vector<string> v;
+        string curr;
+        generate(curr,n,0,0, v);
+        
+        return v;
+        
+    }
+};
