@@ -1,0 +1,28 @@
+class Solution {
+public:
+    string countAndSay(int n) {
+        if(n==1)
+            return "1";
+        
+        string s=countAndSay(n-1);
+        
+        int i=0;
+        int j=0;
+        string ans;
+        int count=0;
+        while(i<s.size())
+        {
+            
+            while(s[i]==s[j] && j<s.size())
+            {   count++;
+               j++;
+            }
+            
+          ans.push_back((48+count));
+          ans.push_back(s[i]);
+            i=j;
+            count=0;   
+        }
+        return ans;
+    }
+}; 
