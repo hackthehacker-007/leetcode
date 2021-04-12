@@ -1,0 +1,43 @@
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        if(height.size()<3)
+            return NULL;
+        int n=height.size();
+        int left=height[0];
+        int right=height[n-1];
+        
+        int i=1,j=n-2;
+        
+        int ans=0;
+        
+        
+        while(i<=j)
+        {
+            if(left<right)
+            {
+                if(left<height[i])
+                    left=height[i];
+                else
+                    ans+=left-height[i];
+                i++;
+            }
+            else
+            {
+                if(right<height[j])
+                    right=height[j];
+                else
+                    ans+=right-height[j];
+                j--;
+                
+            }
+            
+            
+        }
+        
+        
+        return ans;
+        
+        
+    }
+};
