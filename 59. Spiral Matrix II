@@ -1,0 +1,63 @@
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>> v(n);
+         for(int i=0;i<n;i++)
+            v[i]=vector<int>(n);
+        if(n==0)
+            return v;
+        
+       int k=1;
+        
+        int rs=0,re=n-1,cs=0,ce=n-1;
+        
+        int count=1;
+       
+        
+        while(count<=n*n)
+        {
+            for(int i=cs;i<=ce;i++)
+            {v[rs][i]=k;
+             k++;
+             count++;
+            }
+            
+            rs++;
+            if(count>n*n)
+                break;
+            
+             for(int i=rs;i<=re;i++)
+            {v[i][ce]=k;
+             k++;
+             count++;
+            }
+            
+            ce--;
+              if(count>n*n)
+                break;
+            
+            
+             for(int i=ce;i>=cs;i--)
+            {v[re][i]=k;
+             k++;
+             count++;
+            }
+            
+            re--;
+              if(count>n*n)
+                break;
+            
+             for(int i=re;i>=rs;i--)
+            {v[i][cs]=k;
+             k++;
+             count++;
+            }
+            
+            cs++;  
+            
+        }
+        
+        return v;
+            
+    }
+};
