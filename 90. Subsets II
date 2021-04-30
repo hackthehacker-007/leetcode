@@ -1,0 +1,29 @@
+class Solution {
+public:
+    set<vector<int>> m ;
+    
+     void generate(vector<int>&nums,vector<vector<int>>&ans,vector<int>&v,int index)
+    {     
+      if(m.find(v)==m.end())   
+      {    m.insert(v);
+          ans.push_back(v);
+      }
+        for(int i=index;i<nums.size();i++)
+        {
+            v.push_back(nums[i]);
+            generate(nums,ans,v,i+1);
+            v.pop_back();
+        }
+        
+      
+    }
+       
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<int> v;
+        vector<vector<int>>ans;
+        sort(nums.begin(),nums.end());
+        
+        generate(nums,ans,v,0);
+        return ans;
+    }
+};
