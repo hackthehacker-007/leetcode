@@ -1,0 +1,40 @@
+class Solution {
+public:
+      void generate(vector<int>&nums,vector<vector<int>>&ans,vector<int>&v,int index,int k)
+    {  
+       if(index>nums.size())
+           return;
+          
+        if(k==0)
+        {
+            ans.push_back(v);
+            return;
+        }
+          
+         
+       
+        for(int i=index;i<nums.size();i++)
+        {
+            v.push_back(nums[i]);
+            generate(nums,ans,v,i+1,k-1);
+            v.pop_back();
+        }
+        
+      
+    }
+    
+    vector<vector<int>> combine(int n, int k) {
+          vector<int> v;
+        vector<vector<int>>ans;
+        
+        vector<int> nums;
+        
+        for(int i=1;i<=n;i++)
+            nums.push_back(i);
+        
+        
+        generate(nums,ans,v,0,k);
+        return ans;
+    }
+};
+    
