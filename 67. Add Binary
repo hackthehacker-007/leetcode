@@ -1,0 +1,79 @@
+
+#include <string>
+
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        string ans;
+        if(a.size()==0 && b.size()==0)
+            return ans;
+        if(a.size()==0)
+            return b;
+         if(b.size()==0)
+            return a;
+        
+        int i=a.size()-1;
+        int j=b.size()-1;
+        int c=0;
+       
+        
+        while(i>=0 && j>=0)
+        { 
+            int x=a[i]-48;
+            int y=b[j]-48;
+            
+            int sum=x+y+c;
+            if(sum>=2)
+            {
+                sum=sum-2;
+                c=1;
+            }
+            else
+                c=0;
+            i--;
+            j--;
+            
+            ans.push_back(sum+48);
+             
+            
+        }
+        
+        while(i>=0)
+        {   int x=a[i]-48;
+           int sum=x+c;
+            if(sum==2)
+            {
+                sum=0;
+                c=1;
+            }
+         else c=0;
+         i--;
+          ans.push_back(sum+48);
+         
+        }
+        
+         while(j>=0)
+        {   int y=b[j]-48;
+           int sum=y+c;
+            if(sum==2)
+            {
+                sum=0;
+                c=1;
+            }
+         else 
+             c=0;
+         j--;
+          ans.push_back(sum+48);
+         
+        }
+        
+        if(c!=0)
+           ans.push_back(c+48);  
+        
+        reverse(ans.begin(),ans.end());
+        
+        return ans;
+        
+        
+    }
+};
