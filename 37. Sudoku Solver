@@ -1,0 +1,81 @@
+class Solution {
+public:
+    bool isValid(vector<vector<char>>& board, int& row, int& col, char pval) {
+       
+        for (int j = 0; j < board[row].size(); j++) {
+            if (board[row][j] == pval) {
+                
+                return false;
+            }
+        }
+                
+        for (int i = 0; i < board.size(); i++) {
+           
+            if (board[i][col] == pval) {
+               
+                return false;
+            }
+        }
+        
+        int smRow = 3 * (row / 3);
+        int smCol = 3 * (col / 3);
+        
+        
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                
+                if (board[smRow + i][smCol + j] == pval) {
+                    
+                    return false;
+                }
+            }
+        }
+        
+        
+        return true;
+    }
+    
+    bool solveSudoku(vector<vector<char>>& board, int row, int col) {
+        
+        if (row == board.size()) {
+            // Done with all the rows
+            return true;
+        }
+        
+        int nextRow = row;
+        int nextCol = col + 1;
+        
+      
+        if ( col == board[row].size() - 1) {
+            nextRow = row + 1;
+            nextCol = 0;
+        }
+        
+        
+        if (board[row][col] != '.') {
+           
+            return solveSudoku(board, nextRow, nextCol);
+        }
+        
+        
+        for (int pval = 1; pval <= 9; pval++) {
+           
+            if (isValid(board, row, col, pval + '0')) {
+                board[row][col] = pval + '0';
+                if (solveSudoku(board, nextRow, nextCol)) {
+                    return true;
+                }
+                board[row][col] = '.';
+            }
+        }
+        
+        
+        return false;
+    }
+    
+    void solveSudoku(vector<vector<char>>& board) {
+        solveSudoku(board, 0, 0);        
+        
+        return;
+    }
+};
